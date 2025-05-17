@@ -4,7 +4,33 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>For Jenny💖</title>
+    <meta name="description" content="Una carta muy especial para Jenny 💖" />
+    <meta name="theme-color" content="#cce7ff" />
+    <meta property="og:title" content="Para ti, Jenny 💖" />
+    <meta property="og:description" content="Un mensaje con mucho cariño y corazones flotando" />
+    <title>Para Jenny💖</title>
+
+    <!-- Fuente personalizada opcional -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Estilos base del fondo animado -->
+    <style>
+      @keyframes bgAnimado {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(-45deg, #cce7ff, #b3d9ff, #e0f0ff, #cce7ff);
+        background-size: 400% 400%;
+        animation: bgAnimado 15s ease infinite;
+        font-family: 'Segoe UI', 'Pacifico', cursive, sans-serif;
+        min-height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
