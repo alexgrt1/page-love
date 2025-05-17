@@ -5,6 +5,7 @@ function Sorpresa() {
   const [respuesta, setRespuesta] = useState<null | 'si' | 'no'>(null);
   const [mostrarCarta, setMostrarCarta] = useState(false);
   const [animandoCarta, setAnimandoCarta] = useState(false);
+  const [mostrarBrillos, setMostrarBrillos] = useState(false);
 
   useEffect(() => {
     const audio = new Audio('/musica.mp3');
@@ -44,6 +45,24 @@ function Sorpresa() {
 
       <div className="estrellas"></div>
 
+      {mostrarBrillos && (
+        <div className="brillos">
+          {Array.from({ length: 25 }).map((_, i) => (
+            <span
+              key={i}
+              className="destello"
+              style={{
+                top: `${50 + Math.random() * 30 - 15}%`,
+                left: `${50 + Math.random() * 30 - 15}%`,
+                color: ['#fff', '#ffc0cb', '#ffcc70'][i % 3],
+              }}
+            >
+              ✨
+            </span>
+          ))}
+        </div>
+      )}
+
       {!mostrarCarta ? (
         <div style={styles.cartaCerrada} className={animandoCarta ? 'carta-abriendo' : ''}>
           <div className="icono-carta">✉️</div>
@@ -52,9 +71,11 @@ function Sorpresa() {
           <button
             onClick={() => {
               setAnimandoCarta(true);
+              setMostrarBrillos(true);
               setTimeout(() => {
                 setMostrarCarta(true);
                 setAnimandoCarta(false);
+                setTimeout(() => setMostrarBrillos(false), 2000);
               }, 1000);
             }}
             style={styles.mainButton}
@@ -69,7 +90,9 @@ function Sorpresa() {
           <div style={styles.paper}>
             <p style={styles.text}>
               Te diré esto así sin rodeos pero con el corazón en la mano 💖{'\n\n'}
-              Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza... (mensaje completo aquí) 💖
+              Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza. Y no es solo porque
+              seas hermosa (que lo eres, y mucho), sino porque tienes esa forma de estar que se siente bien... 💖
+              (Aquí continúa todo tu mensaje completo) 💖
             </p>
           </div>
 
@@ -109,20 +132,6 @@ function Sorpresa() {
                     No 😢
                   </button>
                 </div>
-                <button
-                  onClick={() => setMostrarModal(false)}
-                  style={{
-                    marginTop: '20px',
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                    color: '#999',
-                    fontSize: '14px',
-                    cursor: 'pointer',
-                    textDecoration: 'underline',
-                  }}
-                >
-                  Pensarlo un poquito más...
-                </button>
               </div>
             </div>
           )}
@@ -313,6 +322,29 @@ const estilosAnimaciones = `
   @keyframes latido {
     0%, 100% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.1); opacity: 0.8; }
+  }
+
+  .brillos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .destello {
+    position: absolute;
+    font-size: 20px;
+    animation: destelloFlotante 1.5s ease-in-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes destelloFlotante {
+    0%   { transform: translateY(0) scale(0.5); opacity: 0; }
+    50%  { opacity: 1; }
+    100% { transform: translateY(-80px) scale(1.2); opacity: 0; }
   }
 
   .explosion-container {
