@@ -69,8 +69,8 @@ function Sorpresa() {
             {!mostrarCarta ? (
                 <div style={styles.cartaCerrada} className={animandoCarta ? 'carta-abriendo' : ''}>
                     <div className="icono-carta">✉️</div>
-                    <h2 style={{ color: '#333', marginTop: '10px' }}>💌 Tienes una carta</h2>
-                    <p>Haz clic para abrirla...</p>
+                    <h2 style={{ color: '#333', marginTop: '10px' }}>💌 Te Envio Esta Carta</h2>
+                    <p>💖Haz clic para abrirla...💖</p>
                     <button
                         onClick={() => {
                             setAnimandoCarta(true);
@@ -92,7 +92,7 @@ function Sorpresa() {
 
                     <div style={styles.paper} className="fondo-carta">
                         <p style={styles.text}>
-                            Te diré esto así sin rodeos pero con el corazón en la mano 💖{'\n\n'}
+                            Jenny, te diré esto así sin rodeos pero con el corazón en la mano 💖{'\n\n'}
                             Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza. Y no es solo porque
                             seas hermosa (que lo eres, y mucho), sino porque tienes esa forma de estar que se siente bien. No sé
                             si lo notas, pero cada vez que hablo contigo, el día se vuelve más liviano… como si bastara un mensaje
