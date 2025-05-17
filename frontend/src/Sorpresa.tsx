@@ -129,8 +129,8 @@ function Sorpresa() {
                             No sé si tú también lo sientes, pero si en algún rincón de tu pecho hay un poquito de eso que yo traigo dentro…
                             entonces, sin prisas y sin presión, podríamos dejar que esto siga creciendo. Y ver hasta dónde nos lleva esta relación
                             tan bonita que tenemos 💖{'\n\n'}
-                            No necesito una respuesta ahora, ni una etiqueta… solo quería que lo supieras. Que contigo me pasan cosas lindas.
-                            Y que sí, puede que no lo diga con todas las letras… pero tú sabes exactamente lo que quiero decir 💖
+                            Solo quería que lo supieras. Que contigo me pasan cosas lindas.
+                            Y que sí, puede que no lo diga con todas las letras… pero tú sabes exactamente lo que quiero decir, y te quiero preguntar lo siguiente..... 💖
                         </p>
                         <img src={foto} alt="Foto dedicada" className="imagen-dedicada" />
                     </div>
