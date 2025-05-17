@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import foto from './assets/foto.png';
 import styles from './styles/sorpresaStyles';
 import './styles/sorpresaAnimaciones.css';
 
@@ -87,10 +88,9 @@ function Sorpresa() {
                 </div>
             ) : (
                 <>
-                    <h1 style={styles.title}>PARA MI PRINCESA👸🏼💖</h1>
+                    <h1 style={styles.title}>PARA MI PRINCESA HERMOSA JENNY👸🏼💖</h1>
 
-                    <div style={styles.paper}>
-                        <h1 style={styles.title}>Jenny 💖</h1>
+                    <div style={styles.paper} className="fondo-carta">
                         <p style={styles.text}>
                             Te diré esto así sin rodeos pero con el corazón en la mano 💖{'\n\n'}
                             Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza. Y no es solo porque
@@ -115,6 +115,7 @@ function Sorpresa() {
                             No necesito una respuesta ahora, ni una etiqueta… solo quería que lo supieras. Que contigo me pasan cosas lindas.
                             Y que sí, puede que no lo diga con todas las letras… pero tú sabes exactamente lo que quiero decir 💖
                         </p>
+                        <img src={foto} alt="Foto dedicada" className="imagen-dedicada" />
                     </div>
 
                     {!respuesta && (
@@ -180,6 +181,7 @@ function Sorpresa() {
                         <div className="triste-container">
                             <h2 style={{ color: '#ccc', marginTop: '50px', textAlign: 'center' }}>
                                 Lo entiendo... gracias por tu sinceridad.
+                                Siempre te voy a desear lo mejor 💔
                             </h2>
                         </div>
                     )}
