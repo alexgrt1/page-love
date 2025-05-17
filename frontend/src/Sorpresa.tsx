@@ -42,30 +42,13 @@ function Sorpresa() {
       </div>
 
       <h1 style={styles.title}>Jenny 💖</h1>
-      <p style={styles.text}>
-        Te diré esto así sin rodeos pero con el corazón en la mano 💖{'\n\n'}
-        Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza. Y no es solo porque
-        seas hermosa (que lo eres, y mucho), sino porque tienes esa forma de estar que se siente bien. No sé
-        si lo notas, pero cada vez que hablo contigo, el día se vuelve más liviano… como si bastara un mensaje
-        tuyo para cambiar mi humor por completo 💖{'\n\n'}
-        Me encanta tu forma de expresarte, tu sentido del humor, esa forma con la que haces que cualquier
-        conversación sea especial. Pero también me gusta cuando te pones seria, cuando hablas desde el corazón,
-        cuando te dejas ver tal como eres. Ahí es donde más me atrapas… y ni siquiera haces esfuerzo, simplemente
-        eres tú 💖{'\n\n'}
-        Y a veces me digo que quizás me estoy imaginando cosas… pero luego te leo, te escucho o me acuerdo de ti
-        y se me va toda la duda. Porque lo que me haces sentir no lo provoca cualquiera. Porque hay algo en nuestra
-        conexión que me hace pensar que esto no es cualquier amistad, que hay algo más… algo que vale la pena cuidar,
-        explorar, disfrutar 💖{'\n\n'}
-        No quiero ponerle nombre a esto todavía, ni correr antes de caminar. Solo quería que supieras que tengo ganas
-        —muchas ganas— de seguir compartiendo más contigo. De conocerte más allá de lo que ya sé. De reírme contigo
-        hasta que duela el estómago, de abrazarte cuando lo necesites, de mandarte mensajes cursis sin motivo, y de estar
-        ahí… simplemente, estar 💖{'\n\n'}
-        No sé si tú también lo sientes, pero si en algún rincón de tu pecho hay un poquito de eso que yo traigo dentro…
-        entonces, sin prisas y sin presión, podríamos dejar que esto siga creciendo. Y ver hasta dónde nos lleva esta relación
-        tan bonita que tenemos 💖{'\n\n'}
-        No necesito una respuesta ahora, ni una etiqueta… solo quería que lo supieras. Que contigo me pasan cosas lindas.
-        Y que sí, puede que no lo diga con todas las letras… pero tú sabes exactamente lo que quiero decir 💖
-      </p>
+
+      <div style={styles.paper}>
+        <p style={styles.text}>
+          Te diré esto así sin rodeos pero con el corazón en la mano 💖{'\n\n'}
+          Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza... (tu mensaje completo aquí) 💖
+        </p>
+      </div>
 
       {!respuesta && (
         <button
@@ -76,7 +59,6 @@ function Sorpresa() {
         </button>
       )}
 
-      {/* MODAL */}
       {mostrarModal && (
         <div style={styles.modalOverlay}>
           <div style={styles.modal}>
@@ -122,7 +104,6 @@ function Sorpresa() {
         </div>
       )}
 
-      {/* RESPUESTA POSITIVA */}
       {respuesta === 'si' && (
         <div className="explosion-container">
           {Array.from({ length: 30 }).map((_, i) => (
@@ -142,7 +123,6 @@ function Sorpresa() {
         </div>
       )}
 
-      {/* RESPUESTA NEGATIVA */}
       {respuesta === 'no' && (
         <div className="triste-container">
           <h2 style={{ color: '#ccc', marginTop: '50px', textAlign: 'center' }}>
@@ -159,7 +139,9 @@ function Sorpresa() {
 
 const styles = {
   container: {
-    backgroundColor: '#fff0f5',
+    background: 'linear-gradient(-45deg, #cce7ff, #b3d9ff, #e0f0ff, #cce7ff)',
+    backgroundSize: '400% 400%',
+    animation: 'bgAnimado 15s ease infinite',
     padding: '40px 20px',
     fontFamily: '"Segoe UI", sans-serif',
     fontSize: '18px',
@@ -172,13 +154,25 @@ const styles = {
   },
   title: {
     fontSize: '32px',
-    color: 'hotpink',
+    color: '#333',
     marginBottom: '30px',
+  },
+  paper: {
+    backgroundColor: '#fff',
+    padding: '40px',
+    borderRadius: '16px',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    maxWidth: '800px',
+    margin: '0 auto',
+    marginTop: '30px',
+    whiteSpace: 'pre-line',
+    animation: 'fadeIn 0.5s ease',
+    color: '#333',
   },
   text: {
     whiteSpace: 'pre-line' as const,
-    maxWidth: '800px',
-    margin: '0 auto',
+    fontSize: '18px',
+    lineHeight: '1.8',
   },
   mainButton: {
     marginTop: '40px',
@@ -209,6 +203,7 @@ const styles = {
     textAlign: 'center' as const,
     boxShadow: '0 0 15px rgba(0,0,0,0.3)',
     maxWidth: '300px',
+    animation: 'fadeIn 0.4s ease',
   },
   modalButtons: {
     display: 'flex',
@@ -236,6 +231,17 @@ const styles = {
 };
 
 const estilosAnimaciones = `
+  @keyframes bgAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
   .heart-container {
     position: absolute;
     top: 0;
