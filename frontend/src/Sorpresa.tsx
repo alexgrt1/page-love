@@ -4,6 +4,7 @@ function Sorpresa() {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [respuesta, setRespuesta] = useState<null | 'si' | 'no'>(null);
   const [mostrarCarta, setMostrarCarta] = useState(false);
+  const [animandoCarta, setAnimandoCarta] = useState(false);
 
   useEffect(() => {
     const audio = new Audio('/musica.mp3');
@@ -44,10 +45,20 @@ function Sorpresa() {
       <div className="estrellas"></div>
 
       {!mostrarCarta ? (
-        <div style={styles.cartaCerrada}>
-          <h2 style={{ color: '#333' }}>💌 Tienes una carta</h2>
-          <p style={{ marginBottom: '20px' }}>Haz clic para abrirla...</p>
-          <button onClick={() => setMostrarCarta(true)} style={styles.mainButton}>
+        <div style={styles.cartaCerrada} className={animandoCarta ? 'carta-abriendo' : ''}>
+          <div className="icono-carta">✉️</div>
+          <h2 style={{ color: '#333', marginTop: '10px' }}>💌 Tienes una carta</h2>
+          <p>Haz clic para abrirla...</p>
+          <button
+            onClick={() => {
+              setAnimandoCarta(true);
+              setTimeout(() => {
+                setMostrarCarta(true);
+                setAnimandoCarta(false);
+              }, 1000);
+            }}
+            style={styles.mainButton}
+          >
             Abrir
           </button>
         </div>
@@ -58,9 +69,7 @@ function Sorpresa() {
           <div style={styles.paper}>
             <p style={styles.text}>
               Te diré esto así sin rodeos pero con el corazón en la mano 💖{'\n\n'}
-              Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza. Y no es solo porque
-              seas hermosa (que lo eres, y mucho), sino porque tienes esa forma de estar que se siente bien... 💖{'\n\n'}
-              (Continúa con tu mensaje completo aquí) 💖
+              Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza... (mensaje completo aquí) 💖
             </p>
           </div>
 
@@ -289,6 +298,21 @@ const estilosAnimaciones = `
     0% { transform: translateY(0); opacity: 0; }
     50% { opacity: 1; }
     100% { transform: translateY(-120vh); opacity: 0; }
+  }
+
+  .icono-carta {
+    font-size: 64px;
+    animation: latido 2s ease-in-out infinite;
+    transition: transform 1s ease;
+  }
+
+  .carta-abriendo .icono-carta {
+    transform: rotateX(180deg) scale(1.2);
+  }
+
+  @keyframes latido {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
   }
 
   .explosion-container {
