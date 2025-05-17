@@ -180,8 +180,7 @@ function Sorpresa() {
                     {respuesta === 'no' && (
                         <div className="triste-container">
                             <h2 style={{ color: '#ccc', marginTop: '50px', textAlign: 'center' }}>
-                                Lo entiendo... gracias por tu sinceridad.
-                                Siempre te voy a desear lo mejor 💔
+                                No me quieres entonces :c 💔
                             </h2>
                         </div>
                     )}
