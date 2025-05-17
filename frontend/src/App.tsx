@@ -19,12 +19,12 @@ function App() {
 
   return (
     <div className="pagina-inicio">
+      {/* Corazones flotando */}
       <div className="heart-container">
         {Array.from({ length: 20 }).map((_, i) => {
           const left = Math.random() * 100;
           const delay = Math.random() * 10;
           const size = Math.random() * 20 + 20;
-  
           return (
             <span
               key={i}
@@ -40,12 +40,16 @@ function App() {
           );
         })}
       </div>
-  
-      <h1>{mensaje || 'Cargando...'}</h1>
-      <button onClick={() => navigate('/sorpresa')}>
-        Haz click aquí
-      </button>
+
+      {/* Cuadro blanco estilo carta */}
+      <div className="inicio-carta">
+        <h1>{mensaje || 'Cargando...'}</h1>
+        <button onClick={() => navigate('/sorpresa')}>
+          Haz click aquí
+        </button>
+      </div>
     </div>
   );
 }
+
 export default App;

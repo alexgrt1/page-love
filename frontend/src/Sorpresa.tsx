@@ -4,21 +4,21 @@ import styles from './styles/sorpresaStyles';
 import './styles/sorpresaAnimaciones.css';
 
 const enviarNotificacion = (respuesta: 'si' | 'no') => {
-    const token = '7582337848:AAGbI-FsOs9mIoSHAqWjkPtr3zAgGbiIZys'; // reemplaza por tu token real
-    const chatId = '6076594873'; // este es tu chat ID confirmado
+    const token = import.meta.env.VITE_TELEGRAM_TOKEN;
+    const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
     const mensaje = `💌 Jenny eligió: ${respuesta === 'si' ? 'Sí 😳' : 'No 😢'}`;
-
+  
     fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: mensaje,
-        }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: mensaje,
+      }),
     });
-};
+  };  
 
 function Sorpresa() {
     const [mostrarModal, setMostrarModal] = useState(false);
