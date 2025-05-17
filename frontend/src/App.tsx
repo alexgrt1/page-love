@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [mensaje, setMensaje] = useState<string>('');
+  const URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
-    fetch('https://page-love-6g5q.onrender.com/api/mensaje')
+    fetch(`${URL}/api/mensaje`)
       .then(res => res.json())
-      .then(data => setMensaje(data.mensaje))
-      .catch(err => console.error(err));
+      .then(data => setMensaje(data.mensaje));
   }, []);
 
   return (
