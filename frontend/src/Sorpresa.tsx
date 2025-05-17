@@ -148,7 +148,7 @@ function Sorpresa() {
                         <div style={styles.modalOverlay}>
                             <div style={styles.modal}>
                                 <h2 style={{ color: 'hotpink' }}>Tu respuesta 💬</h2>
-                                <p>¿Quieres que esto siga creciendo conmigo?</p>
+                                <p>¿Quieres que seamos algo más que amigos?🥹</p>
                                 <div style={styles.modalButtons}>
                                     <button
                                         style={styles.yesButton}
