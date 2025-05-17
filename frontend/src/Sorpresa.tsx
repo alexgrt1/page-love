@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 function Sorpresa() {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [respuesta, setRespuesta] = useState<null | 'si' | 'no'>(null);
+  const [mostrarCarta, setMostrarCarta] = useState(false);
 
   useEffect(() => {
     const audio = new Audio('/musica.mp3');
@@ -24,7 +25,6 @@ function Sorpresa() {
           const left = Math.random() * 100;
           const delay = Math.random() * 10;
           const size = Math.random() * 20 + 20;
-
           return (
             <span
               key={i}
@@ -41,95 +41,111 @@ function Sorpresa() {
         })}
       </div>
 
-      <h1 style={styles.title}>Jenny 💖</h1>
+      <div className="estrellas"></div>
 
-      <div style={styles.paper}>
-        <p style={styles.text}>
-          Te diré esto así sin rodeos pero con el corazón en la mano 💖{'\n\n'}
-          Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza... (tu mensaje completo aquí) 💖
-        </p>
-      </div>
+      {!mostrarCarta ? (
+        <div style={styles.cartaCerrada}>
+          <h2 style={{ color: '#333' }}>💌 Tienes una carta</h2>
+          <p style={{ marginBottom: '20px' }}>Haz clic para abrirla...</p>
+          <button onClick={() => setMostrarCarta(true)} style={styles.mainButton}>
+            Abrir
+          </button>
+        </div>
+      ) : (
+        <>
+          <h1 style={styles.title}>Jenny 💖</h1>
 
-      {!respuesta && (
-        <button
-          onClick={() => setMostrarModal(true)}
-          style={styles.mainButton}
-        >
-          ¿Aceptas? 🥹
-        </button>
-      )}
-
-      {mostrarModal && (
-        <div style={styles.modalOverlay}>
-          <div style={styles.modal}>
-            <h2 style={{ color: 'hotpink' }}>Tu respuesta 💬</h2>
-            <p>¿Quieres que esto siga creciendo conmigo?</p>
-            <div style={styles.modalButtons}>
-              <button
-                style={styles.yesButton}
-                onClick={() => {
-                  setMostrarModal(false);
-                  setRespuesta('si');
-                  setTimeout(() => setRespuesta(null), 5000);
-                }}
-              >
-                Sí 😳
-              </button>
-              <button
-                style={styles.noButton}
-                onClick={() => {
-                  setMostrarModal(false);
-                  setRespuesta('no');
-                  setTimeout(() => setRespuesta(null), 5000);
-                }}
-              >
-                No 😢
-              </button>
-            </div>
-            <button
-              onClick={() => setMostrarModal(false)}
-              style={{
-                marginTop: '20px',
-                backgroundColor: 'transparent',
-                border: 'none',
-                color: '#999',
-                fontSize: '14px',
-                cursor: 'pointer',
-                textDecoration: 'underline',
-              }}
-            >
-              Pensarlo un poquito más...
-            </button>
+          <div style={styles.paper}>
+            <p style={styles.text}>
+              Te diré esto así sin rodeos pero con el corazón en la mano 💖{'\n\n'}
+              Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza. Y no es solo porque
+              seas hermosa (que lo eres, y mucho), sino porque tienes esa forma de estar que se siente bien... 💖{'\n\n'}
+              (Continúa con tu mensaje completo aquí) 💖
+            </p>
           </div>
-        </div>
-      )}
 
-      {respuesta === 'si' && (
-        <div className="explosion-container">
-          {Array.from({ length: 30 }).map((_, i) => (
-            <span
-              key={i}
-              className="explosion"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 2}s`,
-              }}
+          {!respuesta && (
+            <button
+              onClick={() => setMostrarModal(true)}
+              style={styles.mainButton}
             >
-              💖
-            </span>
-          ))}
-          <h2 style={{ color: 'hotpink', marginTop: '50px' }}>¡Me haces muy feliz! 💕</h2>
-        </div>
-      )}
+              ¿Aceptas? 🥹
+            </button>
+          )}
 
-      {respuesta === 'no' && (
-        <div className="triste-container">
-          <h2 style={{ color: '#ccc', marginTop: '50px', textAlign: 'center' }}>
-            Lo entiendo... gracias por tu sinceridad.  
-            Siempre te voy a desear lo mejor 💔
-          </h2>
-        </div>
+          {mostrarModal && (
+            <div style={styles.modalOverlay}>
+              <div style={styles.modal}>
+                <h2 style={{ color: 'hotpink' }}>Tu respuesta 💬</h2>
+                <p>¿Quieres que esto siga creciendo conmigo?</p>
+                <div style={styles.modalButtons}>
+                  <button
+                    style={styles.yesButton}
+                    onClick={() => {
+                      setMostrarModal(false);
+                      setRespuesta('si');
+                      setTimeout(() => setRespuesta(null), 5000);
+                    }}
+                  >
+                    Sí 😳
+                  </button>
+                  <button
+                    style={styles.noButton}
+                    onClick={() => {
+                      setMostrarModal(false);
+                      setRespuesta('no');
+                      setTimeout(() => setRespuesta(null), 5000);
+                    }}
+                  >
+                    No 😢
+                  </button>
+                </div>
+                <button
+                  onClick={() => setMostrarModal(false)}
+                  style={{
+                    marginTop: '20px',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    color: '#999',
+                    fontSize: '14px',
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                  }}
+                >
+                  Pensarlo un poquito más...
+                </button>
+              </div>
+            </div>
+          )}
+
+          {respuesta === 'si' && (
+            <div className="explosion-container">
+              {Array.from({ length: 30 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="explosion"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 2}s`,
+                  }}
+                >
+                  💖
+                </span>
+              ))}
+              <h2 style={{ color: 'hotpink', marginTop: '50px' }}>¡Me haces muy feliz! 💕</h2>
+            </div>
+          )}
+
+          {respuesta === 'no' && (
+            <div className="triste-container">
+              <h2 style={{ color: '#ccc', marginTop: '50px', textAlign: 'center' }}>
+                Lo entiendo... gracias por tu sinceridad.  
+                Siempre te voy a desear lo mejor 💔
+              </h2>
+            </div>
+          )}
+        </>
       )}
 
       <style>{estilosAnimaciones}</style>
@@ -151,6 +167,16 @@ const styles = {
     position: 'relative' as const,
     overflow: 'hidden',
     minHeight: '100vh',
+  },
+  cartaCerrada: {
+    backgroundColor: '#fff',
+    padding: '40px',
+    borderRadius: '16px',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    maxWidth: '400px',
+    margin: '100px auto',
+    textAlign: 'center' as const,
+    animation: 'fadeIn 0.5s ease',
   },
   title: {
     fontSize: '32px',
@@ -175,7 +201,7 @@ const styles = {
     lineHeight: '1.8',
   },
   mainButton: {
-    marginTop: '40px',
+    marginTop: '30px',
     fontSize: '18px',
     padding: '12px 24px',
     backgroundColor: 'hotpink',
@@ -302,6 +328,36 @@ const estilosAnimaciones = `
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+
+  .estrellas {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow:
+      20vw 10vh white,
+      35vw 20vh #fff,
+      50vw 30vh #eee,
+      65vw 25vh #fff,
+      80vw 10vh #eee,
+      25vw 50vh white,
+      40vw 60vh #fff,
+      55vw 70vh #eee,
+      70vw 55vh #fff,
+      85vw 45vh #eee;
+    animation: parpadeo 6s ease-in-out infinite, moverEstrellas 40s linear infinite;
+    z-index: 0;
+  }
+
+  @keyframes parpadeo {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  @keyframes moverEstrellas {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50px); }
   }
 `;
 
