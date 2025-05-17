@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './styles/sorpresaAnimaciones.css';
 
 function App() {
   const [mensaje, setMensaje] = useState<string>('');
@@ -17,25 +18,34 @@ function App() {
   }, []);
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '100px' }}>
+    <div className="pagina-inicio">
+      <div className="heart-container">
+        {Array.from({ length: 20 }).map((_, i) => {
+          const left = Math.random() * 100;
+          const delay = Math.random() * 10;
+          const size = Math.random() * 20 + 20;
+  
+          return (
+            <span
+              key={i}
+              className="heart"
+              style={{
+                left: `${left}%`,
+                fontSize: `${size}px`,
+                animationDelay: `${-delay}s`,
+              }}
+            >
+              💖
+            </span>
+          );
+        })}
+      </div>
+  
       <h1>{mensaje || 'Cargando...'}</h1>
-      <button
-        style={{
-          fontSize: '24px',
-          padding: '16px 32px',
-          backgroundColor: 'hotpink',
-          border: 'none',
-          borderRadius: '12px',
-          cursor: 'pointer',
-          color: 'white',
-          marginTop: '40px',
-        }}
-        onClick={() => navigate('/sorpresa')}
-      >
+      <button onClick={() => navigate('/sorpresa')}>
         Haz click aquí
       </button>
     </div>
   );
 }
-
 export default App;
