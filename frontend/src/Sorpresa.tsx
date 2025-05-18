@@ -60,7 +60,8 @@ function Sorpresa() {
 
     // ✏️ Texto con efecto máquina de escribir
     const contenido =
-        ` Jenny, te diré esto así sin rodeos pero con el corazón en la mano 💖
+        ` 
+        Jenny, te diré esto así sin rodeos pero con el corazón en la mano 💖
 
 Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza. Y no es solo porque
 seas hermosa (que lo eres, y mucho), sino porque tienes esa forma de estar que se siente bien. No sé
