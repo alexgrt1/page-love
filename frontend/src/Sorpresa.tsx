@@ -4,8 +4,8 @@ import styles from './styles/sorpresaStyles';
 import './styles/sorpresaAnimaciones.css';
 
 const enviarNotificacion = (respuesta: 'si' | 'no') => {
-    const token = import.meta.env.VITE_TELEGRAM_TOKEN;
-    const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+    const token = '8100281362:AAET6n21mBLvylWLGaJsU8-XLicpMkgwnio';
+    const chatId = '6076594873';
     const mensaje = `💌 Jenny eligió: ${respuesta === 'si' ? 'Sí 😳' : 'No 😢'}`;
   
     fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
