@@ -8,7 +8,6 @@ const enviarNotificacion = (respuesta: 'si' | 'no') => {
     const chatId = '6076594873';
     const mensaje = `💌 Jenny eligió: ${respuesta === 'si' ? 'Sí 😳' : 'No 😢'}`;
 
-
     fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: 'POST',
         headers: {
@@ -27,6 +26,7 @@ function Sorpresa() {
     const [mostrarCarta, setMostrarCarta] = useState(false);
     const [animandoCarta, setAnimandoCarta] = useState(false);
     const [mostrarBrillos, setMostrarBrillos] = useState(false);
+    const [mostrarSecreto, setMostrarSecreto] = useState(false);
     const esMovil = window.innerWidth <= 768;
 
 
@@ -44,10 +44,13 @@ function Sorpresa() {
     }, []);
 
     return (
-        <div style={styles.container} 
-        className={esMovil ? 'modo-movil' : ''}
+        <div style={styles.container}
+            className={esMovil ? 'modo-movil' : ''}
         >
             <div className="heart-container">
+                {animandoCarta && (
+                    <div className="pajarito-volando">🐦✉️</div>
+                )}
                 {Array.from({ length: 20 }).map((_, i) => {
                     const left = Math.random() * 100;
                     const delay = Math.random() * 10;
@@ -89,28 +92,23 @@ function Sorpresa() {
             )}
 
             {!mostrarCarta ? (
-                <div
-                    className={`entrega-carta ${animandoCarta ? 'carta-abriendo' : ''}`}
-                    onAnimationEnd={() => setAnimandoCarta(false)}
-                >
-                    <div className="sobre-cerrado">
-                        <div className="icono-carta">✉️</div>
-                        <h2 style={{ color: '#333', marginTop: '10px' }}>💌 Te Envío Esta Carta</h2>
-                        <p>💖Haz clic para abrirla...💖</p>
-                        <button
-                            onClick={() => {
-                                setAnimandoCarta(true);
-                                setMostrarBrillos(true);
-                                setTimeout(() => {
-                                    setMostrarCarta(true);
-                                    setTimeout(() => setMostrarBrillos(false), 2000);
-                                }, 1500);
-                            }}
-                            style={styles.mainButton}
-                        >
-                            Abrir
-                        </button>
-                    </div>
+                <div className="regalo-caja">
+                    <div className="emoji-regalo">🎁</div>
+                    <h2>💖 Tengo algo especial para ti 💖</h2>
+                    <p>Haz clic para abrir el regalo...</p>
+                    <button
+                        onClick={() => {
+                            setAnimandoCarta(true);
+                            setMostrarBrillos(true);
+                            setTimeout(() => {
+                                setMostrarCarta(true);
+                                setTimeout(() => setMostrarBrillos(false), 2000);
+                            }, 1500);
+                        }}
+                        style={styles.mainButton}
+                    >
+                        Abrir regalo
+                    </button>
                 </div>
             ) : (
 
@@ -150,7 +148,7 @@ function Sorpresa() {
                             onClick={() => setMostrarModal(true)}
                             style={styles.mainButton}
                         >
-                            ¿Aceptas? 🥹
+                            💖 Responde Jenny 🥹
                         </button>
                     )}
 
@@ -189,22 +187,59 @@ function Sorpresa() {
                     )}
 
                     {respuesta === 'si' && (
-                        <div className="explosion-container">
-                            {Array.from({ length: 30 }).map((_, i) => (
-                                <span
-                                    key={i}
-                                    className="explosion"
-                                    style={{
-                                        left: `${Math.random() * 100}%`,
-                                        top: `${Math.random() * 100}%`,
-                                        animationDelay: `${Math.random() * 2}s`,
-                                    }}
-                                >
-                                    💖
-                                </span>
-                            ))}
-                            <h2 style={{ color: 'hotpink', marginTop: '50px' }}>¡Me haces muy feliz! 💕</h2>
-                        </div>
+                        <>
+                            <div className="explosion-container">
+                                {/* explosiones de corazones */}
+                                <h2 style={{ color: 'hotpink', marginTop: '50px' }}>¡Me haces muy feliz! 💕</h2>
+                            </div>
+
+                            {/* Mensaje final secreto */}
+                            <div style={{ textAlign: 'center', marginTop: '40px' }}>
+                                <h2 style={{ color: '#444' }}>
+                                    Ahora ya sabes lo que siento… pero pronto te contaré algo más 🙊
+                                </h2>
+
+                                {!mostrarSecreto && (
+                                    <button
+                                        onClick={() => setMostrarSecreto(true)}
+                                        style={{
+                                            marginTop: '20px',
+                                            fontSize: '18px',
+                                            padding: '10px 20px',
+                                            backgroundColor: '#ff69b4',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '10px',
+                                            cursor: 'pointer',
+                                            animation: 'fadeIn 1s ease',
+                                        }}
+                                    >
+                                        ¿Lo quieres saber ahora?
+                                    </button>
+                                )}
+
+                                {mostrarSecreto && (
+                                    <div
+                                        style={{
+                                            marginTop: '20px',
+                                            backgroundColor: '#fff',
+                                            padding: '25px',
+                                            borderRadius: '12px',
+                                            maxWidth: '600px',
+                                            marginInline: 'auto',
+                                            boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+                                            animation: 'fadeIn 1s ease',
+                                        }}
+                                    >
+                                        <p style={{ fontSize: '18px', color: '#555' }}>
+                                            💖 Pues… lo que no te he dicho es que ya no imagino mis días sin ti.
+                                            Eres lo mejor que me ha pasado, serás mi esposa y la futura madre de nuestros hijos.
+                                            Y que esta carta no es el final... sino solo el comienzo de algo hermoso que quiero vivir contigo 💑✨
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </>
                     )}
 
                     {respuesta === 'no' && (

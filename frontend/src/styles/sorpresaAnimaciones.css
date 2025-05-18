@@ -354,6 +354,53 @@
   margin-top: 20px;
 }
 
+/* Caja de regalo */
+.regalo-caja {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 350px;
+  margin: 100px auto;
+  animation: fadeIn 1s ease;
+}
+
+.emoji-regalo {
+  font-size: 64px;
+  animation: reboteCaja 2s infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes reboteCaja {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Pajarito mensajero */
+.pajarito-volando {
+  position: absolute;
+  top: 60%;
+  left: -50px;
+  font-size: 48px;
+  animation: vueloPajarito 1.5s ease-in-out forwards;
+  z-index: 999;
+}
+
+@keyframes vueloPajarito {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120vw) translateY(-200px);
+    opacity: 0;
+  }
+}
+
     /* App.tsx */
 .pagina-inicio {
     background: linear-gradient(-45deg, #cce7ff, #b3d9ff, #e0f0ff, #cce7ff);
