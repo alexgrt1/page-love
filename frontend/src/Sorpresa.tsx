@@ -8,6 +8,7 @@ const enviarNotificacion = (respuesta: 'si' | 'no') => {
     const chatId = '6076594873';
     const mensaje = `💌 Jenny eligió: ${respuesta === 'si' ? 'Sí 😳' : 'No 😢'}`;
 
+
     fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: 'POST',
         headers: {
@@ -26,6 +27,8 @@ function Sorpresa() {
     const [mostrarCarta, setMostrarCarta] = useState(false);
     const [animandoCarta, setAnimandoCarta] = useState(false);
     const [mostrarBrillos, setMostrarBrillos] = useState(false);
+    const esMovil = window.innerWidth <= 768;
+
 
     useEffect(() => {
         const audio = new Audio('/musica.mp3');
@@ -41,7 +44,9 @@ function Sorpresa() {
     }, []);
 
     return (
-        <div style={styles.container}>
+        <div style={styles.container} 
+        className={esMovil ? 'modo-movil' : ''}
+        >
             <div className="heart-container">
                 {Array.from({ length: 20 }).map((_, i) => {
                     const left = Math.random() * 100;
