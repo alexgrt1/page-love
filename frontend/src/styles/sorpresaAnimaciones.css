@@ -299,6 +299,29 @@
     transform: translateY(-50px);
   }
 }
+
+.icono-carta {
+  font-size: 64px;
+  animation: latido 2s ease-in-out infinite;
+  transition: transform 1s ease;
+  display: inline-block;
+}
+
+.carta-abriendo .icono-carta {
+  transform: rotateX(180deg) scale(1.2);
+}
+
+@keyframes latido {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.85;
+  }
+}
+
     /* App.tsx */
 .pagina-inicio {
     background: linear-gradient(-45deg, #cce7ff, #b3d9ff, #e0f0ff, #cce7ff);
