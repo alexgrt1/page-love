@@ -7,18 +7,18 @@ const enviarNotificacion = (respuesta: 'si' | 'no') => {
     const token = '8100281362:AAET6n21mBLvylWLGaJsU8-XLicpMkgwnio';
     const chatId = '6076594873';
     const mensaje = `💌 Jenny eligió: ${respuesta === 'si' ? 'Sí 😳' : 'No 😢'}`;
-  
+
     fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: mensaje,
-      }),
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: mensaje,
+        }),
     });
-  };  
+};
 
 function Sorpresa() {
     const [mostrarModal, setMostrarModal] = useState(false);
@@ -84,26 +84,31 @@ function Sorpresa() {
             )}
 
             {!mostrarCarta ? (
-                <div style={styles.cartaCerrada} className={animandoCarta ? 'carta-abriendo' : ''}>
-                    <div className="icono-carta">✉️</div>
-                    <h2 style={{ color: '#333', marginTop: '10px' }}>💌 Te Envio Esta Carta</h2>
-                    <p>💖Haz clic para abrirla...💖</p>
-                    <button
-                        onClick={() => {
-                            setAnimandoCarta(true);
-                            setMostrarBrillos(true);
-                            setTimeout(() => {
-                                setMostrarCarta(true);
-                                setAnimandoCarta(false);
-                                setTimeout(() => setMostrarBrillos(false), 2000);
-                            }, 1000);
-                        }}
-                        style={styles.mainButton}
-                    >
-                        Abrir
-                    </button>
+                <div
+                    className={`entrega-carta ${animandoCarta ? 'carta-abriendo' : ''}`}
+                    onAnimationEnd={() => setAnimandoCarta(false)}
+                >
+                    <div className="sobre-cerrado">
+                        <div className="icono-carta">✉️</div>
+                        <h2 style={{ color: '#333', marginTop: '10px' }}>💌 Te Envío Esta Carta</h2>
+                        <p>💖Haz clic para abrirla...💖</p>
+                        <button
+                            onClick={() => {
+                                setAnimandoCarta(true);
+                                setMostrarBrillos(true);
+                                setTimeout(() => {
+                                    setMostrarCarta(true);
+                                    setTimeout(() => setMostrarBrillos(false), 2000);
+                                }, 1500);
+                            }}
+                            style={styles.mainButton}
+                        >
+                            Abrir
+                        </button>
+                    </div>
                 </div>
             ) : (
+
                 <>
                     <h1 style={styles.title}>PARA MI PRINCESA HERMOSA JENNY👸🏼💖</h1>
 

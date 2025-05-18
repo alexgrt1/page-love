@@ -300,6 +300,38 @@
   }
 }
 
+.entrega-carta {
+  animation: deslizarCarta 1.5s ease-out forwards;
+  position: relative;
+  z-index: 10;
+}
+
+.sobre-cerrado {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: 100px auto;
+  text-align: center;
+  animation: latido 2s ease-in-out infinite;
+}
+
+@keyframes deslizarCarta {
+  0% {
+    opacity: 0;
+    transform: translateY(-200px) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(30px) scale(1.05);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+
     /* App.tsx */
 .pagina-inicio {
     background: linear-gradient(-45deg, #cce7ff, #b3d9ff, #e0f0ff, #cce7ff);
