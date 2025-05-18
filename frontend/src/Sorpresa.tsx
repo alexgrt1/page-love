@@ -10,13 +10,8 @@ const enviarNotificacion = (respuesta: 'si' | 'no') => {
 
     fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: mensaje,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text: mensaje }),
     });
 };
 
@@ -27,10 +22,12 @@ function Sorpresa() {
     const [animandoCarta, setAnimandoCarta] = useState(false);
     const [mostrarBrillos, setMostrarBrillos] = useState(false);
     const [mostrarSecreto, setMostrarSecreto] = useState(false);
-    const esMovil = window.innerWidth <= 768;
-
+    const [esMovil, setEsMovil] = useState(false);
 
     useEffect(() => {
+        // Detectar si es móvil al cargar
+        setEsMovil(window.innerWidth <= 768);
+
         const audio = new Audio('/musica.mp3');
         audio.loop = true;
         audio.volume = 0.5;
@@ -44,13 +41,10 @@ function Sorpresa() {
     }, []);
 
     return (
-        <div style={styles.container}
-            className={esMovil ? 'modo-movil' : ''}
-        >
+        <div className={`fondo ${esMovil ? 'modo-movil' : ''}`} style={styles.container}>
+            {/* Corazones flotantes */}
             <div className="heart-container">
-                {animandoCarta && (
-                    <div className="pajarito-volando">🐦✉️</div>
-                )}
+                {animandoCarta && <div className="pajarito-volando">🐦✉️</div>}
                 {Array.from({ length: 20 }).map((_, i) => {
                     const left = Math.random() * 100;
                     const delay = Math.random() * 10;
@@ -70,9 +64,8 @@ function Sorpresa() {
                     );
                 })}
             </div>
-
+            {/* BRILLOS Y ESTRELLAS */}
             <div className="estrellas"></div>
-
             {mostrarBrillos && (
                 <div className="brillos">
                     {Array.from({ length: 25 }).map((_, i) => (
@@ -91,6 +84,7 @@ function Sorpresa() {
                 </div>
             )}
 
+            {/* VISTA CAJA REGALO */}
             {!mostrarCarta ? (
                 <div className="regalo-caja">
                     <div className="emoji-regalo">🎁</div>
@@ -101,9 +95,11 @@ function Sorpresa() {
                             setAnimandoCarta(true);
                             setMostrarBrillos(true);
                             setTimeout(() => {
+                                console.log('Abriendo regalo...');
                                 setMostrarCarta(true);
-                                setTimeout(() => setMostrarBrillos(false), 2000);
-                            }, 1500);
+                                setAnimandoCarta(false); // ✅ Se desactiva la animación
+                                setTimeout(() => setMostrarBrillos(false), 1500);
+                            }, 1500); // Duración de animación
                         }}
                         style={styles.mainButton}
                     >
@@ -111,7 +107,6 @@ function Sorpresa() {
                     </button>
                 </div>
             ) : (
-
                 <>
                     <h1 style={styles.title}>PARA MI PRINCESA HERMOSA JENNY👸🏼💖</h1>
 
@@ -144,10 +139,7 @@ function Sorpresa() {
                     </div>
 
                     {!respuesta && (
-                        <button
-                            onClick={() => setMostrarModal(true)}
-                            style={styles.mainButton}
-                        >
+                        <button onClick={() => setMostrarModal(true)} style={styles.mainButton}>
                             💖 Responde Jenny 🥹
                         </button>
                     )}
@@ -156,27 +148,24 @@ function Sorpresa() {
                         <div style={styles.modalOverlay}>
                             <div style={styles.modal}>
                                 <h2 style={{ color: 'hotpink' }}>Tu respuesta 💬</h2>
-                                <p>¿Quieres que seamos algo más que amigos?🥹</p>
+                                <p>¿Quieres que seamos algo más que amigos? 🥹</p>
                                 <div style={styles.modalButtons}>
                                     <button
                                         style={styles.yesButton}
                                         onClick={() => {
                                             setMostrarModal(false);
                                             setRespuesta('si');
-                                            enviarNotificacion('si'); // ✅ Agregado aquí
-                                            setTimeout(() => setRespuesta(null), 5000);
+                                            enviarNotificacion('si');
                                         }}
                                     >
                                         Sí 😳
                                     </button>
-
                                     <button
                                         style={styles.noButton}
                                         onClick={() => {
                                             setMostrarModal(false);
                                             setRespuesta('no');
-                                            enviarNotificacion('no'); // ✅ Agregado aquí
-                                            setTimeout(() => setRespuesta(null), 5000);
+                                            enviarNotificacion('no');
                                         }}
                                     >
                                         No 😢
@@ -189,16 +178,14 @@ function Sorpresa() {
                     {respuesta === 'si' && (
                         <>
                             <div className="explosion-container">
-                                {/* explosiones de corazones */}
                                 <h2 style={{ color: 'hotpink', marginTop: '50px' }}>¡Me haces muy feliz! 💕</h2>
                             </div>
 
-                            {/* Mensaje final secreto */}
+                            {/* MENSAJE FINAL */}
                             <div style={{ textAlign: 'center', marginTop: '40px' }}>
                                 <h2 style={{ color: '#444' }}>
                                     Ahora ya sabes lo que siento… pero pronto te contaré algo más 🙊
                                 </h2>
-
                                 {!mostrarSecreto && (
                                     <button
                                         onClick={() => setMostrarSecreto(true)}
@@ -217,7 +204,6 @@ function Sorpresa() {
                                         ¿Lo quieres saber ahora?
                                     </button>
                                 )}
-
                                 {mostrarSecreto && (
                                     <div
                                         style={{
@@ -254,4 +240,5 @@ function Sorpresa() {
         </div>
     );
 }
+
 export default Sorpresa;
