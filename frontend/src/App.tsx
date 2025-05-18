@@ -17,6 +17,16 @@ function App() {
       });
   }, []);
 
+  // ✅ Función para reproducir música
+  const reproducirMusica = () => {
+    const audio = new Audio('/musica.mp3');
+    audio.loop = true;
+    audio.volume = 0.5;
+    audio.play().catch(() => {
+      console.warn('Autoplay bloqueado por el navegador.');
+    });
+  };
+
   return (
     <div className="pagina-inicio">
       {/* Corazones flotando */}
@@ -44,7 +54,12 @@ function App() {
       {/* Cuadro blanco estilo carta */}
       <div className="inicio-carta">
         <h1>{mensaje || 'Cargando...'}</h1>
-        <button onClick={() => navigate('/sorpresa')}>
+        <button
+          onClick={() => {
+            reproducirMusica(); // 🔊 Reproducir música al hacer clic
+            navigate('/sorpresa');
+          }}
+        >
           Haz click aquí
         </button>
       </div>
