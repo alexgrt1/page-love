@@ -3,40 +3,22 @@ import foto from './assets/foto.png';
 import styles from './styles/sorpresaStyles';
 import './styles/sorpresaAnimaciones.css';
 
-// 🔠 Efecto de máquina de escribir
-function useEscribirTexto(texto: string, velocidad = 25) {
-    const [resultado, setResultado] = useState('');
-
-    useEffect(() => {
-        let i = 0;
-        const intervalo = setInterval(() => {
-            setResultado(prev => prev + texto.charAt(i));
-            i++;
-            if (i >= texto.length) clearInterval(intervalo);
-        }, velocidad);
-        return () => clearInterval(intervalo);
-    }, [texto]);
-
-    return resultado;
-}
-
-// 💬 Telegram notification
 const enviarNotificacion = (respuesta: 'si' | 'no') => {
     const token = '8100281362:AAET6n21mBLvylWLGaJsU8-XLicpMkgwnio';
     const chatId = '6076594873';
     const mensaje = `💌 Jenny eligió: ${respuesta === 'si' ? 'Sí 😳' : 'No 😢'}`;
-
+  
     fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: mensaje,
-        }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: mensaje,
+      }),
     });
-};
+  };  
 
 function Sorpresa() {
     const [mostrarModal, setMostrarModal] = useState(false);
@@ -57,40 +39,6 @@ function Sorpresa() {
             audio.pause();
         };
     }, []);
-
-    // ✏️ Texto con efecto máquina de escribir
-    const contenido =
-        ` 
-        Jenny, te diré esto así sin rodeos pero con el corazón en la mano 💖
-
-Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza. Y no es solo porque
-seas hermosa (que lo eres, y mucho), sino porque tienes esa forma de estar que se siente bien. No sé
-si lo notas, pero cada vez que hablo contigo, el día se vuelve más liviano… como si bastara un mensaje
-tuyo para cambiar mi humor por completo 💖
-
-Me encanta tu forma de expresarte, tu sentido del humor, esa forma con la que haces que cualquier
-conversación sea especial. Pero también me gusta cuando te pones seria, cuando hablas desde el corazón,
-cuando te dejas ver tal como eres. Ahí es donde más me atrapas… y ni siquiera haces esfuerzo, simplemente
-eres tú 💖
-
-Y a veces me digo que quizás me estoy imaginando cosas… pero luego te leo, te escucho o me acuerdo de ti
-y se me va toda la duda. Porque lo que me haces sentir no lo provoca cualquiera. Porque hay algo en nuestra
-conexión que me hace pensar que esto no es cualquier amistad, que hay algo más… algo que vale la pena cuidar,
-explorar, disfrutar 💖
-
-No quiero ponerle nombre a esto todavía, ni correr antes de caminar. Solo quería que supieras que tengo ganas
-—muchas ganas— de seguir compartiendo más contigo. De conocerte más allá de lo que ya sé. De reírme contigo
-hasta que duela el estómago, de abrazarte cuando lo necesites, de mandarte mensajes cursis sin motivo, y de estar
-ahí… simplemente, estar 💖
-
-No sé si tú también lo sientes, pero si en algún rincón de tu pecho hay un poquito de eso que yo traigo dentro…
-entonces, sin prisas y sin presión, podríamos dejar que esto siga creciendo. Y ver hasta dónde nos lleva esta relación
-tan bonita que tenemos 💖
-
-Solo quería que lo supieras. Que contigo me pasan cosas lindas.
-Y que sí, puede que no lo diga con todas las letras… pero tú sabes exactamente lo que quiero decir, y te quiero preguntar lo siguiente..... 💖`;
-
-    const textoVisible = useEscribirTexto(contenido, 20);
 
     return (
         <div style={styles.container}>
@@ -160,7 +108,30 @@ Y que sí, puede que no lo diga con todas las letras… pero tú sabes exactamen
                     <h1 style={styles.title}>PARA MI PRINCESA HERMOSA JENNY👸🏼💖</h1>
 
                     <div style={styles.paper} className="fondo-carta">
-                        <p style={styles.text}>{textoVisible}</p>
+                        <p style={styles.text}>
+                            Jenny, te diré esto así sin rodeos pero con el corazón en la mano 💖{'\n\n'}
+                            Desde hace un tiempo, hay algo en ti que no deja de dar vueltas en mi cabeza. Y no es solo porque
+                            seas hermosa (que lo eres, y mucho), sino porque tienes esa forma de estar que se siente bien. No sé
+                            si lo notas, pero cada vez que hablo contigo, el día se vuelve más liviano… como si bastara un mensaje
+                            tuyo para cambiar mi humor por completo 💖{'\n\n'}
+                            Me encanta tu forma de expresarte, tu sentido del humor, esa forma con la que haces que cualquier
+                            conversación sea especial. Pero también me gusta cuando te pones seria, cuando hablas desde el corazón,
+                            cuando te dejas ver tal como eres. Ahí es donde más me atrapas… y ni siquiera haces esfuerzo, simplemente
+                            eres tú 💖{'\n\n'}
+                            Y a veces me digo que quizás me estoy imaginando cosas… pero luego te leo, te escucho o me acuerdo de ti
+                            y se me va toda la duda. Porque lo que me haces sentir no lo provoca cualquiera. Porque hay algo en nuestra
+                            conexión que me hace pensar que esto no es cualquier amistad, que hay algo más… algo que vale la pena cuidar,
+                            explorar, disfrutar 💖{'\n\n'}
+                            No quiero ponerle nombre a esto todavía, ni correr antes de caminar. Solo quería que supieras que tengo ganas
+                            —muchas ganas— de seguir compartiendo más contigo. De conocerte más allá de lo que ya sé. De reírme contigo
+                            hasta que duela el estómago, de abrazarte cuando lo necesites, de mandarte mensajes cursis sin motivo, y de estar
+                            ahí… simplemente, estar 💖{'\n\n'}
+                            No sé si tú también lo sientes, pero si en algún rincón de tu pecho hay un poquito de eso que yo traigo dentro…
+                            entonces, sin prisas y sin presión, podríamos dejar que esto siga creciendo. Y ver hasta dónde nos lleva esta relación
+                            tan bonita que tenemos 💖{'\n\n'}
+                            Solo quería que lo supieras. Que contigo me pasan cosas lindas.
+                            Y que sí, puede que no lo diga con todas las letras… pero tú sabes exactamente lo que quiero decir, y te quiero preguntar lo siguiente..... 💖
+                        </p>
                         <img src={foto} alt="Foto dedicada" className="imagen-dedicada" />
                     </div>
 
@@ -184,7 +155,7 @@ Y que sí, puede que no lo diga con todas las letras… pero tú sabes exactamen
                                         onClick={() => {
                                             setMostrarModal(false);
                                             setRespuesta('si');
-                                            enviarNotificacion('si');
+                                            enviarNotificacion('si'); // ✅ Agregado aquí
                                             setTimeout(() => setRespuesta(null), 5000);
                                         }}
                                     >
@@ -196,7 +167,7 @@ Y que sí, puede que no lo diga con todas las letras… pero tú sabes exactamen
                                         onClick={() => {
                                             setMostrarModal(false);
                                             setRespuesta('no');
-                                            enviarNotificacion('no');
+                                            enviarNotificacion('no'); // ✅ Agregado aquí
                                             setTimeout(() => setRespuesta(null), 5000);
                                         }}
                                     >
@@ -238,5 +209,4 @@ Y que sí, puede que no lo diga con todas las letras… pero tú sabes exactamen
         </div>
     );
 }
-
 export default Sorpresa;
